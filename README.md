@@ -1,7 +1,7 @@
 
 
 
-![alt text](https://github.com/ShaanWocker/HF-E-Commerce/blob/master/src/assets/images/ScreenShot1.png?raw=true)
+![alt text](https://github.com/ShaanWocker/HF-E-Commerce/blob/master/src/assets/images/Screenshot1.png?raw=true)
 
 
 __________________________________________________________________________________
