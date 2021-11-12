@@ -11,23 +11,36 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-
+    font-size: 70px;
+    margin-bottom: 20px;
 `;
 
 const Desc = styled.div`
-
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 20px;
 `;
 
 const InputContainer = styled.div`
-
+    width: 50%;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid lightgray;
 `;
 
 const Input = styled.input`
-
+    border: none;
+    flex: 8;
+    padding-left: 20px;
 `;
 
 const Button = styled.button`
-
+    flex: 1;
+    border: none;
+    background-color: teal;
+    color: white;
 `;
 
 const Newsletter = () => {
@@ -35,8 +48,8 @@ const Newsletter = () => {
         <Container>
             <Title>Newsletter</Title>
             <Desc>Honey Floral has the best range to suite your unique style.</Desc>
-            <InputContainer placeholder="Your E-mail">
-                <Input/>
+            <InputContainer>
+                <Input placeholder="Your E-mail"/>
                 <Button>
                     <Send/>
                 </Button>
