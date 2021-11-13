@@ -3,7 +3,9 @@
 
 ![alt text](https://github.com/ShaanWocker/HF-E-Commerce/blob/master/src/assets/images/Screenshot1.png?raw=true)
 
+![alt text](https://github.com/ShaanWocker/HF-E-Commerce/blob/master/src/assets/images/Screenshot2.png?raw=true)
 
+![alt text](https://github.com/ShaanWocker/HF-E-Commerce/blob/master/src/assets/images/Screenshot3.png?raw=true)
 __________________________________________________________________________________
 
 # Getting Started with Create React App
