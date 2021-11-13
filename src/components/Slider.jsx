@@ -27,6 +27,7 @@ const Arrow = styled.div`
     margin: auto;
     cursor: pointer;
     opacity: 0.5;
+    z-index: 2;
 `;
 
 const Wrapper = styled.div`
@@ -97,9 +98,7 @@ const Slider = () => {
                         </ImgContainer>
                         <InfoContainer>
                             <Title>{item.title}</Title>
-                            <Desc>
-                                {item.desc}
-                            </Desc>
+                            <Desc>{item.desc}</Desc>
                             <Button>SHOP NOW</Button>
                         </InfoContainer>
                     </Slide>
