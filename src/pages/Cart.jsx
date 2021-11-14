@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
+import { Add, Remove } from "@material-ui/icons";
 
 
 const Container = styled.div`
@@ -96,8 +97,58 @@ const PriceDetail = styled.div`
     justify-content: center;
 `;
 
+const ProductAmountContainer = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px
+`;
+
+const ProductAmount = styled.div`
+    font-size: 24px;
+    margin: 5px;
+`;
+
+const ProductPrice = styled.div`
+    font-size: 30px;
+    font-weight: 200;
+`;
+
+const Hr = styled.hr`
+    background-color: #eee;
+    border: none;
+    height: 1px;
+`;
+
 const Summary = styled.span`
     flex: 1;
+    border: 0.5px solid lightgray;
+    border-radius: 10px;
+    padding 20px;
+    height: 50vh;
+`;
+
+const SummaryTitle = styled.h1`
+    font-weight: 200:
+`;
+
+const SummaryItem = styled.div`
+    margin: 30px 0px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: ${props=>props.type === "total" && "500"};
+    font-size: ${props=>props.type === "total" && "25px"};
+`;
+
+const SummaryItemText = styled.span``;
+
+const SummaryItemPrice = styled.span``;
+
+const Button = styled.button`
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-weight: 600;
 `;
 
 const Cart = () => {
@@ -110,7 +161,6 @@ const Cart = () => {
                     Your Bag
                 </Title>
                 <Top>
-
                     <TopButton>Continue Shopping</TopButton>
                     <TopTexts>
                         <TopText>Shopping Bag (2)</TopText>
@@ -132,11 +182,55 @@ const Cart = () => {
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
-                                price
+                                <ProductAmountContainer>
+                                    <Add/>
+                                    <ProductAmount>2</ProductAmount>
+                                    <Remove/>
+                                </ProductAmountContainer>
+                                <ProductPrice> R 699</ProductPrice>
+                            </PriceDetail>
+                        </Product>
+                        <Hr/>
+                        <Product>
+                            <ProductDetail>
+                                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
+                                <Details>
+                                    <ProductName><b>Product:</b>PHILZ T-SHIRT</ProductName>
+                                    <ProductId><b>ID:</b> 7896 3456 34</ProductId>
+                                    <ProductColor color="gray" />
+                                    <ProductSize><b>Size:</b> M </ProductSize>
+                                </Details>
+                            </ProductDetail>
+                            <PriceDetail>
+                                <ProductAmountContainer>
+                                    <Add/>
+                                    <ProductAmount>2</ProductAmount>
+                                    <Remove/>
+                                </ProductAmountContainer>
+                                <ProductPrice> R 299</ProductPrice>
                             </PriceDetail>
                         </Product>
                     </Info>
-                    <Summary>summary</Summary>
+                    <Summary>
+                        <SummaryTitle>Order Summary</SummaryTitle>
+                        <SummaryItem>
+                            <SummaryItemText>Subtotal</SummaryItemText>
+                            <SummaryItemPrice>R 954</SummaryItemPrice>
+                        </SummaryItem>
+                        <SummaryItem>
+                            <SummaryItemText>Estimated Shipping</SummaryItemText>
+                            <SummaryItemPrice>R 11</SummaryItemPrice>
+                        </SummaryItem>
+                        <SummaryItem>
+                            <SummaryItemText>Shipping Discount</SummaryItemText>
+                            <SummaryItemPrice>R -40</SummaryItemPrice>
+                        </SummaryItem>
+                        <SummaryItem type="total">
+                            <SummaryItemText>Total</SummaryItemText>
+                            <SummaryItemPrice>R 1234</SummaryItemPrice>
+                        </SummaryItem>
+                        <Button>Checkout Now</Button>
+                    </Summary>
                 </Bottom>
             </Wrapper>
             <Footer/>
