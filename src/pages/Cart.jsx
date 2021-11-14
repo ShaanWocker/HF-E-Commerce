@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
+import { Add, Remove } from "@material-ui/icons";
 
 
 const Container = styled.div`
@@ -96,6 +97,28 @@ const PriceDetail = styled.div`
     justify-content: center;
 `;
 
+const ProductAmountContainer = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px
+`;
+
+const ProductAmount = styled.div`
+    font-size: 24px;
+    margin: 5px;
+`;
+
+const ProductPrice = styled.div`
+    font-size: 30px;
+    font-weight: 200;
+`;
+
+const Hr = styled.hr`
+    background-color: #eee;
+    border: none;
+    height: 1px;
+`;
+
 const Summary = styled.span`
     flex: 1;
 `;
@@ -132,7 +155,33 @@ const Cart = () => {
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
-                                price
+                                <ProductAmountContainer>
+                                    <Add/>
+                                    <ProductAmount>2</ProductAmount>
+                                    <Remove/>
+                                </ProductAmountContainer>
+                                <ProductPrice> R 699</ProductPrice>
+                            </PriceDetail>
+                        </Product>
+                        <Hr/>
+                        <Product>
+                            <ProductDetail>
+
+                                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
+                                <Details>
+                                    <ProductName><b>Product:</b>PHILZ T-SHIRT</ProductName>
+                                    <ProductId><b>ID:</b> 7896 3456 34</ProductId>
+                                    <ProductColor color="gray" />
+                                    <ProductSize><b>Size:</b> M </ProductSize>
+                                </Details>
+                            </ProductDetail>
+                            <PriceDetail>
+                                <ProductAmountContainer>
+                                    <Add/>
+                                    <ProductAmount>2</ProductAmount>
+                                    <Remove/>
+                                </ProductAmountContainer>
+                                <ProductPrice> R 299</ProductPrice>
                             </PriceDetail>
                         </Product>
                     </Info>
