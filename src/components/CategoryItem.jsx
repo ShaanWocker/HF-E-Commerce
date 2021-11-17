@@ -7,7 +7,7 @@ const Container = styled.div`
     margin: 3px;
     height: 70vh;
     position: relative; 
-    `;
+`;
 const Image = styled.img`
     width: 100%;
     height: 100%;
@@ -32,7 +32,7 @@ const Title = styled.h1`
 const Button = styled.button`
     border: none;
     padding: 10px;
-    backgrround-color: white;
+    background-color: white;
     color: gray;
     cursor: pointer;
     font-weight: 600;
