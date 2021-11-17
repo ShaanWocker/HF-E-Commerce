@@ -14,7 +14,7 @@ const Container = styled.div`
 const Announcement = () => {
     return (
         <Container> Free shipping on orders over R1000 </Container>
-    )
-}
+    );
+};
 
 export default Announcement;

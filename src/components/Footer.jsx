@@ -96,7 +96,6 @@ const Footer = () => {
                 </SocialContainer>
             </Left>
             <Center>
-
                 <Title>Useful Links</Title>
                 <List>
                     <ListItem>Home</ListItem>
@@ -114,25 +113,25 @@ const Footer = () => {
             <Right>
                 <Title>Contact</Title>
                     <ContactItem>
-                        <Room style={{marginRight:"10px"}} />
+                        <Room style={{ marginRight: "10px" }} />
                             Shop 54B, 
                             
                             Brackenfell shopping center, 
 
                             Corner of Jeanette street and 
                             
-                            Old paarl road, 
+                            Old Paarl road, 
 
                             Brackenfell, 
 
                             7560
                     </ContactItem>
                     <ContactItem>
-                        <Phone style={{marginRight:"10px"}}/>
+                        <Phone style={{ marginRight: "10px" }}/>
                           +27 66 250 1291 / +27 79 082 1181
                     </ContactItem>
                     <ContactItem>
-                        <MailOutlined style={{marginRight:"10px"}}/>
+                        <MailOutlined style={{ marginRight: "10px" }}/>
                             GabrielleDuplessis97@gmail.com / ShaanWocker@gmail.com
                     </ContactItem>
                     <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
