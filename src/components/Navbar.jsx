@@ -13,12 +13,12 @@ const Wrapper = styled.div`
     padding: 10px 20px;
     display: flex;
     align_items: center;
-    justify-content space-between;
+    justify-content: space-between;
     ${mobile({ padding: "10px 0px"})};
 `;
 
 const Left = styled.div`
-    flex:1;
+    flex: 1;
     display: flex;
     align_items: center;
 `;
@@ -34,12 +34,12 @@ const SearchContainer = styled.div`
     display: flex;
     align_items: center;
     margin-left: 25px;
-    padding: 5px
+    padding: 5px;
 `;
 
 const Input = styled.input`
     border: none;
-    ${mobile({ width: "50px"})};
+    ${mobile({ width: "50px" })};
 `;
 
 const Center = styled.div`
@@ -57,7 +57,7 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    ${mobile({ justifyContent: "center"})};
+    ${mobile({ flex: 2, justifyContent: "center"})};
 `;
 
 const MenuItem = styled.div`
