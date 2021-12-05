@@ -20,7 +20,7 @@ const Desc = styled.div`
     font-size: 24px;
     font-weight: 300;
     margin-bottom: 20px;
-    ${mobile({ textAlign: "center" })};
+    ${mobile({ textAlign: "center" })}
 `;
 
 const InputContainer = styled.div`
@@ -44,6 +44,7 @@ const Button = styled.button`
     border: none;
     background-color: teal;
     color: white;
+    cursor: pointer;
 `;
 
 const Newsletter = () => {
@@ -58,7 +59,7 @@ const Newsletter = () => {
                 </Button>
             </InputContainer>
         </Container>
-    )
-}
+    );
+};
 
 export default Newsletter;

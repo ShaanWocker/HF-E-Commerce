@@ -4,7 +4,13 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
+import {useSelector} from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { useEffect, useState } from "react";
+import {userRequest} from "../requestMethods";
+import { useNavigate } from "react-router";
 
+const KEY = process.env.REACT_APP_STRIPE; 
 
 const Container = styled.div`
 
@@ -12,7 +18,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
     padding: 20px;
-    ${mobile({ padding: "10px" })};
+    ${mobile({ padding: "10px" })}
 `;
 
 const Title = styled.h1`
@@ -34,12 +40,12 @@ const TopButton = styled.button`
     border: ${(props) => props.type === "filled" && "none"};
     background-color: ${(props) =>
         props.type === "filled" ? "black" : "transparent"};
-    color: ${(props) => props.type === "filled" && "white"}
+    color: ${(props) => props.type === "filled" && "white"};
 
 `;
 
 const TopTexts = styled.div`
-    ${mobile({ display: "none" })};
+    ${mobile({ display: "none" })}
 `;
 
 const TopText = styled.span`
@@ -51,7 +57,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
-    ${mobile({ flexDirection: "column" })};
+    ${mobile({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
@@ -61,7 +67,7 @@ const Info = styled.div`
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
-    ${mobile({ flexDirection: "column" })};
+    ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -104,19 +110,19 @@ const PriceDetail = styled.div`
 const ProductAmountContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 `;
 
 const ProductAmount = styled.div`
     font-size: 24px;
     margin: 5px;
-    ${mobile({ margin: "5px 15px" })};
+    ${mobile({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
     font-size: 30px;
     font-weight: 200;
-    ${mobile({ marginBottom: "20px" })};
+    ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`
@@ -141,8 +147,8 @@ const SummaryItem = styled.div`
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
-    font-weight: ${props=>props.type === "total" && "500"};
-    font-size: ${props=>props.type === "total" && "25px"};
+    font-weight: ${(props)=>props.type === "total" && "500"};
+    font-size: ${(props)=>props.type === "total" && "25px"};
 `;
 
 const SummaryItemText = styled.span``;
@@ -158,6 +164,26 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+    const cart = useSelector((state) => state.cart);
+    const [stripeToken, setStripeToken] = useState(null);
+    const history = useNavigate();
+
+    const onToken = (token) => {
+        setStripeToken(token);
+    };
+    
+    useEffect(() =>{
+        const makeRequest = async () => {
+            try{
+                const res = await userRequest.post("/checkout/payment", {
+                    tokenId: stripeToken.id,
+                    amount:cart.total * 100,
+                });
+                history.push("/success", {data: res.data});
+            }catch{}
+        };
+        stripeToken && makeRequest();
+    }, [stripeToken, cart.total, history]);
     return (
         <Container>
             <Navbar/>
@@ -175,73 +201,74 @@ const Cart = () => {
                     <TopButton type="filled">Checkout Now</TopButton>
                 </Top>
                 <Bottom>
-                    <Info>
+                <Info>
+                    {cart.products.map((product) => (
                         <Product>
                             <ProductDetail>
-
-                                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
+                                <Image src={product.img} />
                                 <Details>
-                                    <ProductName><b>Product:</b> JESSIE THUNDER SHOES</ProductName>
-                                    <ProductId><b>ID:</b> 5465 3456 34</ProductId>
-                                    <ProductColor color="black" />
-                                    <ProductSize><b>Size:</b> 5 </ProductSize>
+                                    <ProductName>
+                                        <b>Product:</b> {product.title}
+                                    </ProductName>
+                                    <ProductId>
+                                        <b>ID:</b> {product._id}
+                                    </ProductId>
+                                    <ProductColor color={product.color} />
+                                    <ProductSize>
+                                        <b>Size:</b> {product.size}
+                                    </ProductSize>
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add/>
-                                    <ProductAmount>2</ProductAmount>
-                                    <Remove/>
-                                </ProductAmountContainer>
-                                <ProductPrice> R 699</ProductPrice>
+                            <ProductAmountContainer>
+                                <Add />
+                                <ProductAmount>{product.quantity}</ProductAmount>
+                                <Remove />
+                            </ProductAmountContainer>
+                            <ProductPrice>
+                                $ {product.price * product.quantity}
+                            </ProductPrice>
                             </PriceDetail>
                         </Product>
-                        <Hr/>
-                        <Product>
-                            <ProductDetail>
-                                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                                <Details>
-                                    <ProductName><b>Product:</b>PHILZ T-SHIRT</ProductName>
-                                    <ProductId><b>ID:</b> 7896 3456 34</ProductId>
-                                    <ProductColor color="gray" />
-                                    <ProductSize><b>Size:</b> M </ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add/>
-                                    <ProductAmount>2</ProductAmount>
-                                    <Remove/>
-                                </ProductAmountContainer>
-                                <ProductPrice> R 299</ProductPrice>
-                            </PriceDetail>
-                        </Product>
+                        ))}
+                        <Hr />
                     </Info>
                     <Summary>
                         <SummaryTitle>Order Summary</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>R 954</SummaryItemPrice>
+                            <SummaryItemPrice>R {cart.total}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Shipping</SummaryItemText>
-                            <SummaryItemPrice>R 11</SummaryItemPrice>
+                            <SummaryItemPrice>R 0</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Shipping Discount</SummaryItemText>
-                            <SummaryItemPrice>R -40</SummaryItemPrice>
+                            <SummaryItemPrice>R 0</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>R 1234</SummaryItemPrice>
+                            <SummaryItemPrice>R {cart.total}</SummaryItemPrice>
                         </SummaryItem>
+                        <StripeCheckout 
+                            name="Honey Floral" 
+                            image=""
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is R${cart.total}`}
+                            amount={cart.total*100}
+                            token={onToken}
+                            stripeKey={KEY}
+                        >
                         <Button>Checkout Now</Button>
+                        </StripeCheckout>
                     </Summary>
                 </Bottom>
             </Wrapper>
             <Footer/>
         </Container>
-    )
-}
+    );
+};
 
 export default Cart;
