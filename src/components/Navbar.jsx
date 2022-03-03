@@ -75,7 +75,7 @@ const Navbar = () => {
                     <Language>EN</Language>
                     <SearchContainer>
                         <Input placeholder="Search"/>
-                        <Search style={{color: "gray", fontSize: "16"}}/>
+                        <Search style={{color: "gray", fontSize: 16}}/>
                     </SearchContainer>
                 </Left>
                 <Center><Logo>Honey Floral</Logo></Center>
