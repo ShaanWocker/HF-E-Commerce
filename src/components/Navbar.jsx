@@ -83,10 +83,14 @@ const Navbar = () => {
                         <Search style={{color: "gray", fontSize: 16}}/>
                     </SearchContainer>
                 </Left>
-                <Center><Logo>Honey Floral</Logo></Center>
+                <Center><Logo>HONEY FLORAL</Logo></Center>
                 <Right>
-                    <MenuItem>Register</MenuItem>
-                    <MenuItem>Sign In</MenuItem>
+                <Link to="/register">
+                    <MenuItem>REGISTER</MenuItem>
+                </Link>    
+                <Link to="/login">
+                    <MenuItem>SIGN IN</MenuItem>
+                </Link>
                     <Link to="/cart">
                     <MenuItem>
                         <Badge badgeContent={quantity} color="primary">
