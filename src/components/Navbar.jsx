@@ -3,6 +3,10 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import styled from "styled-components";
 import { Badge } from "@material-ui/core";
 import { mobile } from "../responsive";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../redux/apiCalls";
+import { logoutStart } from "../redux/userRedux";
 
 const Container = styled.div`
     height: 60px;
@@ -68,28 +72,57 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+
+    const quantity = useSelector(state => state.cart.quantity);
+    const user = useSelector((state) => state.user.currentUser);
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout()(dispatch);
+        dispatch((logoutStart));
+        navigate("/");
+    }
+
     return (
         <Container>
-            <Wrapper>
-                <Left>
-                    <Language>EN</Language>
-                    <SearchContainer>
-                        <Input placeholder="Search"/>
-                        <Search style={{color: "gray", fontSize: 16}}/>
-                    </SearchContainer>
-                </Left>
-                <Center><Logo>Honey Floral</Logo></Center>
-                <Right>
-                    <MenuItem>Register</MenuItem>
-                    <MenuItem>Sign In</MenuItem>
-                    <MenuItem>
-                        <Badge badgeContent={4} color="primary">
-                            <ShoppingCartOutlined />
-                        </Badge>
-                    </MenuItem>
-                </Right>
-            </Wrapper>
-        </Container>
+        <Wrapper>
+            <Left>
+                <Language>EN</Language>
+                <SearchContainer>
+                    <Input placeholder="Search"/>
+                    <Search style={{color: "gray", fontSize: 16}}/>
+                </SearchContainer>
+            </Left>
+            <Center>
+          <Logo>HONEY FLORAL</Logo>
+        </Center>
+        <Right>
+          {user ? (
+            <Link to="/">
+              <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+            </Link>
+          ) : (
+            <>
+              <Link to="/register">
+                <MenuItem>REGISTER</MenuItem>
+              </Link>
+              <Link to="/login">
+                <MenuItem>SIGN IN</MenuItem>
+              </Link>
+            </>
+          )}
+                <Link to="/cart">
+                <MenuItem>
+                    <Badge badgeContent={quantity} color="primary">
+                        <ShoppingCartOutlined />
+                    </Badge>
+                </MenuItem>
+                </Link>
+            </Right>
+        </Wrapper>
+    </Container>
     )
 }
 
