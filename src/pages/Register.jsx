@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { mobile } from"../responsive";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../redux/apiCalls";
+import { register, login } from "../redux/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     width: 100vw;
@@ -69,6 +70,7 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const navigate = useNavigate()
 
     const dispatch = useDispatch();
     const { isFetching, error } = useSelector((state) => state.user);
@@ -81,8 +83,11 @@ const Register = () => {
             return;
           }
       
-          register(dispatch, { firstName, lastName, username, email, password });
-        };
+          dispatch(register({ firstName, lastName, username, email, password }))
+            .then(() => dispatch(login({ username, password })))
+            .then(() => navigate("/"))
+            .catch((error) => console.log(error));
+};
     
     
         return (
@@ -106,7 +111,7 @@ const Register = () => {
                         By creating an account, I consent to the processing of my personal data in accordance with the <b>PRIVACY POLICY</b>
                     </ Agreement>
                     <Button onClick={handleClick} disabled={isFetching}>Create</Button>
-                    { error && <Error>Something went wrong . . .</Error>}
+                    {error && error.message && <Error>{error.message}</Error>}
                 </Form>
             </Wrapper>
         </Container>
