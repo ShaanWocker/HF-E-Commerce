@@ -1,3 +1,4 @@
+import { COLORS, SIZES } from "../data";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
@@ -71,26 +72,19 @@ const ProductList = () => {
                 <Filter>
                     <FilterText>Filter Products:</FilterText>
                         <Select name="color" onChange={handleFilters}>
-                            <Option disabled >
-                                Color
-                            </Option>
-                            <Option>white</Option>
-                            <Option>black</Option>
-                            <Option>red</Option>
-                            <Option>blue</Option>
-                            <Option>yellow</Option>
-                            <Option>green</Option>
-                        </Select>
-                        <Select name="size" onChange={handleFilters}>
-                            <Option disabled >
-                                Size
-                            </Option>
-                            <Option>XS</Option>
-                            <Option>S</Option>
-                            <Option>M</Option>
-                            <Option>L</Option>
-                            <Option>XL</Option>
-                        </Select>
+                            <Option disabled>Color</Option>
+                            {COLORS.map((color) => (
+                                <Option key={color.toLowerCase()}>{color}</Option>
+                            ))}
+                            </Select>
+
+                            <Select name="size" onChange={handleFilters}>
+                            <Option disabled>Size</Option>
+                            {SIZES.map((size) => (
+                                <Option key={size}>{size}</Option>
+                            ))}
+                            </Select>
+
                     </Filter>
                 <Filter>
                     <FilterText>Sort Products:</FilterText>
