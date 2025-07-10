@@ -77,3 +77,39 @@ export const popularProducts = [
     img: 'https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png',
   },
 ];
+
+export const CATEGORIES = [
+  "Tops",
+  "Bottoms",
+  "Outerwear",
+  "Dresses",
+  "Loungewear",
+  "Activewear",
+  "Accessories",
+  "Footwear"
+];
+
+export const SIZES = [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+  "One Size"];
+
+export const COLORS = [
+    "White",
+    "Black",
+    "Grey",
+    "Beige",
+    "Navy",
+    "Blue",
+    "Red",
+    "Pink",
+    "Green",
+    "Yellow",
+    "Brown",
+    "Orange",
+    "Purple"
+];
