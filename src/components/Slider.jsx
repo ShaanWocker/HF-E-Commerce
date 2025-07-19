@@ -94,7 +94,8 @@ const Slider = () => {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const res = await publicRequest.get("/media?type=slider");
+        const res = await publicRequest.get("/media?section=slider");
+
         setSlides(res.data);
       } catch (err) {
         console.error("Failed to fetch slider data:", err);

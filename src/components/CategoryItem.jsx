@@ -7,13 +7,34 @@ const Container = styled.div`
   margin: 3px;
   height: 70vh;
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover img {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  &:hover ${'' /* overlay effect */} div {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &:hover button {
+    transform: scale(1.05);
+    background-color: black;
+    color: white;
+  }
+
+  ${mobile({ height: "30vh" })};
 `;
+
 const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  ${mobile({ height: "30vh" })};
+  transition: all 0.5s ease;
 `;
+
 const Info = styled.div`
   position: absolute;
   top: 0;
@@ -24,19 +45,27 @@ const Info = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  transition: all 0.5s ease;
 `;
+
 const Title = styled.h1`
   color: white;
   margin-bottom: 20px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  transition: opacity 0.5s ease;
 `;
+
 const Button = styled.button`
-  border: none;
-  padding: 10px;
-  background-color: white;
-  color: gray;
-  cursor: pointer;
-  font-weight: 600;
+  ...
+  opacity: 0.9;
+
+  ${Container}:hover & {
+    opacity: 1;
+  }
 `;
+
+
 
 const CategoryItem = ({ item }) => {
   return (
