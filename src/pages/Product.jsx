@@ -159,7 +159,7 @@ const Product = () => {
 
   const handleClick = () => {
     if (product.inStock > 0) {
-      dispatch(addProduct({ ...product, quantity, color, size }));
+      dispatch(addProduct({ ...product, quantity, color, size, stock: product.inStock }));
     }
   };
 

@@ -1,5 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -7,6 +7,11 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
+import {
+  removeProduct,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../redux/cartRedux";
 
 const Container = styled.div``;
 
@@ -109,13 +114,26 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
+  transition: all 0.2s ease-in-out;
   ${mobile({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
+  transition: all 0.2s ease-in-out;
   ${mobile({ marginBottom: "20px" })}
+`;
+
+
+const RemoveBtn = styled.button`
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 `;
 
 const Hr = styled.hr`
@@ -151,6 +169,7 @@ const SummaryItemPrice = styled.span``;
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <Container>
@@ -159,94 +178,135 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => navigate("/")}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag({cart.products.length})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton type="filled" disabled={cart.products.length === 0}>
+            CHECKOUT NOW
+          </TopButton>
         </Top>
-        <Bottom>
-          <Info>
-            {cart.products.map((product) => (
-              <Product key={product._id}>
-                <ProductDetail>
-                  <Image src={product.img} />
-                  <Details>
-                    <ProductName>
-                      <b>Product:</b> {product.title}
-                    </ProductName>
-                    <ProductId>
-                      <b>ID:</b> {product._id}
-                    </ProductId>
-                    <ProductColor color={product.color} />
-                    <ProductSize>
-                      <b>Size:</b> {product.size}
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>
-                    R {product.price * product.quantity}
-                  </ProductPrice>
-                </PriceDetail>
-              </Product>
-            ))}
-            <Hr />
-          </Info>
-          <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-            <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>R {cart.total}</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>R 110</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>R 0.00</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem type="total">
-              <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>R {cart.total + 110}</SummaryItemPrice>
-            </SummaryItem>
 
-            {/* PayPal Button Integration */}
-            <PayPalScriptProvider options={{ "client-id": "PAYPAL_CLIENT_ID" }}>
-              <PayPalButtons
-                style={{ layout: "vertical" }}
-                createOrder={(data, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        amount: {
-                          value: (cart.total + 110).toFixed(2),
-                        },
-                      },
-                    ],
-                  });
-                }}
-                onApprove={async (data, actions) => {
-                  const details = await actions.order.capture();
-                  // Optionally, you can send details to your backend here
+        {cart.products.length === 0 ? (
+          <h3 style={{ textAlign: "center", marginTop: "50px" }}>
+            Your cart is empty.
+          </h3>
+        ) : (
+          <Bottom>
+            <Info>
+              {cart.products.map((product) => (
+                <Product key={product._id}>
+                  <ProductDetail>
+                    <Image src={product.img} />
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID:</b> {product._id}
+                      </ProductId>
+                      <ProductColor color={product.color} />
+                      <ProductSize>
+                        <b>Size:</b> {product.size}
+                      </ProductSize>
+                      <RemoveBtn
+                        onClick={() => dispatch(removeProduct(product._id))}
+                      >
+                        Remove
+                      </RemoveBtn>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Add
+                        style={{ cursor: "pointer" }}
+                        onClick={() =>
+                          dispatch(
+                            increaseQuantity({
+                              _id: product._id,
+                              color: product.color,
+                              size: product.size,
+                            })
+                          )
+                        }
+                      />
+                      <ProductAmount>{product.quantity}</ProductAmount>
+                      <Remove
+                        style={{
+                          cursor: product.quantity > 1 ? "pointer" : "not-allowed",
+                          opacity: product.quantity > 1 ? 1 : 0.5,
+                        }}
+                        disabled={product.quantity <= 1}
+                        onClick={() =>
+                          dispatch(
+                            decreaseQuantity({
+                              _id: product._id,
+                              color: product.color,
+                              size: product.size,
+                            })
+                          )
+                        }
+                      />
+                    </ProductAmountContainer>
+                    <ProductPrice>
+                      R {product.price * product.quantity}
+                    </ProductPrice>
+                  </PriceDetail>
+                </Product>
+              ))}
+              <Hr />
+            </Info>
+            <Summary>
+              <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+              <SummaryItem>
+                <SummaryItemText>Subtotal</SummaryItemText>
+                <SummaryItemPrice>R {cart.total}</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText>Estimated Shipping</SummaryItemText>
+                <SummaryItemPrice>R 110</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText>Shipping Discount</SummaryItemText>
+                <SummaryItemPrice>R 0.00</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem type="total">
+                <SummaryItemText>Total</SummaryItemText>
+                <SummaryItemPrice>R {cart.total + 110}</SummaryItemPrice>
+              </SummaryItem>
 
-                  navigate("/success", { state: { paypalData: details, products: cart } });
-                }}
-                onError={(err) => {
-                  console.error("PayPal Checkout onError", err);
-                  alert("Payment failed, please try again.");
-                }}
-              />
-            </PayPalScriptProvider>
-          </Summary>
-        </Bottom>
+              <PayPalScriptProvider options={{ "client-id": "PAYPAL_CLIENT_ID" }}>
+                {cart.products.length > 0 && (
+                  <PayPalButtons
+                    style={{ layout: "vertical" }}
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                        purchase_units: [
+                          {
+                            amount: {
+                              value: (cart.total + 110).toFixed(2),
+                            },
+                          },
+                        ],
+                      });
+                    }}
+                    onApprove={async (data, actions) => {
+                      const details = await actions.order.capture();
+                      navigate("/success", {
+                        state: { paypalData: details, products: cart },
+                      });
+                    }}
+                    onError={(err) => {
+                      console.error("PayPal Checkout onError", err);
+                      alert("Payment failed, please try again.");
+                    }}
+                  />
+                )}
+              </PayPalScriptProvider>
+            </Summary>
+          </Bottom>
+        )}
       </Wrapper>
       <Footer />
     </Container>
