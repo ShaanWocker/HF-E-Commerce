@@ -1,0 +1,34 @@
+[33m47825c4[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/media-routing[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{0}: checkout: moving from develop to feature/media-routing
+[33m47825c4[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/media-routing[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{1}: pull: Fast-forward
+[33m040cb26[m HEAD@{2}: checkout: moving from develop to develop
+[33m040cb26[m HEAD@{3}: checkout: moving from feature/hover-effects-and-responsiveness to develop
+[33mfa70675[m[33m ([m[1;31morigin/feature/hover-effects-and-responsiveness[m[33m)[m HEAD@{4}: commit: feat(media): add MediaManager image upload, delete & fetch fixes
+[33m040cb26[m HEAD@{5}: checkout: moving from develop to feature/hover-effects-and-responsiveness
+[33m040cb26[m HEAD@{6}: commit: feat: added Popular Products section with dynamic media from popular section of media collection
+[33m2e5a254[m HEAD@{7}: commit: data.js
+[33mefbd7bc[m HEAD@{8}: commit: feat: enable authenticated media uploads via Firebase and save to backend
+[33mba87a78[m HEAD@{9}: pull origin develop: Fast-forward
+[33mc0e451c[m HEAD@{10}: checkout: moving from feature/shared-ui-data to develop
+[33m38219c9[m[33m ([m[1;31morigin/feature/shared-ui-data[m[33m)[m HEAD@{11}: commit: Sync admin and frontend UI filters with shared data constants
+[33mc0e451c[m HEAD@{12}: checkout: moving from develop to feature/shared-ui-data
+[33mc0e451c[m HEAD@{13}: pull --rebase origin develop (finish): returning to refs/heads/develop
+[33mc0e451c[m HEAD@{14}: pull --rebase origin develop (pick): Implement dynamic stock handling and cart quantity validation
+[33m24f72b5[m HEAD@{15}: pull --rebase origin develop (start): checkout 24f72b513be1dc27698700156746301967596e4b
+[33mbb5f47a[m HEAD@{16}: commit: Implement dynamic stock handling and cart quantity validation
+[33m2ce6e0f[m HEAD@{17}: checkout: moving from feature/cart-page to develop
+[33me8c519b[m[33m ([m[1;31morigin/feature/cart-page[m[33m)[m HEAD@{18}: reset: moving to HEAD
+[33me8c519b[m[33m ([m[1;31morigin/feature/cart-page[m[33m)[m HEAD@{19}: commit: Fix: use product._id as React key to prevent duplicate key warning
+[33m1bfbc26[m HEAD@{20}: commit: Implement cart page functionality and success page with PayPal support
+[33m2ce6e0f[m HEAD@{21}: checkout: moving from develop to feature/cart-page
+[33m2ce6e0f[m HEAD@{22}: commit: modified: package.json
+[33m20c511c[m HEAD@{23}: commit: removed more unused components
+[33m5d19c63[m HEAD@{24}: checkout: moving from staging to develop
+[33m4782e9b[m[33m ([m[1;32mstaging[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{25}: reset: moving to HEAD
+[33m4782e9b[m[33m ([m[1;32mstaging[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{26}: checkout: moving from master to staging
+[33m4782e9b[m[33m ([m[1;32mstaging[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{27}: checkout: moving from develop to master
+[33m5d19c63[m HEAD@{28}: commit: Removed unused component
+[33ma349c4e[m HEAD@{29}: reset: moving to origin/master
+[33m22de1d8[m HEAD@{30}: commit: clean up App.jsx
+[33m823ecd7[m HEAD@{31}: reset: moving to origin/develop
+[33m823ecd7[m HEAD@{32}: checkout: moving from master to develop
+[33m4782e9b[m[33m ([m[1;32mstaging[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{33}: clone: from https://github.com/ShaanWocker/HF-E-Commerce.git
